@@ -1,0 +1,99 @@
+<div>
+  <h2 id="page-heading" data-cy="LaboratoireHeading">
+    <span>Laboratoires</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-laboratoire"
+        [routerLink]="['/laboratoire/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Laboratoire</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (laboratoires?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Aucun Laboratoire trouvé</span>
+    </div>
+  }
+
+  @if (laboratoires && laboratoires.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="labno">
+              <div class="d-flex">
+                <span>Labno</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="labnom">
+              <div class="d-flex">
+                <span>Labnom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="facno.facno">
+              <div class="d-flex">
+                <span>Facno</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (laboratoire of laboratoires; track trackLabno) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/laboratoire', laboratoire.labno, 'view']">{{ laboratoire.labno }}</a>
+              </td>
+              <td>{{ laboratoire.labnom }}</td>
+              <td>
+                @if (laboratoire.facno) {
+                  <div>
+                    <a [routerLink]="['/faculte', laboratoire.facno.facno, 'view']">{{ laboratoire.facno.facno }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/laboratoire', laboratoire.labno, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/laboratoire', laboratoire.labno, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(laboratoire)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

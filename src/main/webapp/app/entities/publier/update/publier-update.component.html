@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-publier-heading" data-cy="PublierCreateUpdateHeading">Créer ou éditer un Publier</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.pubId.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_pubId">Pub Id</label>
+            <input
+              type="number"
+              class="form-control"
+              name="pubId"
+              id="field_pubId"
+              data-cy="pubId"
+              formControlName="pubId"
+              [readonly]="true"
+            />
+            @if (editForm.get('pubId')!.invalid && (editForm.get('pubId')!.dirty || editForm.get('pubId')!.touched)) {
+              <div>
+                @if (editForm.get('pubId')?.errors?.required) {
+                  <small class="form-text text-danger">Ce champ est obligatoire.</small>
+                }
+                <small class="form-text text-danger" [hidden]="!editForm.get('pubId')?.errors?.number">Ce champ doit être un nombre.</small>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rang">Rang</label>
+          <input type="number" class="form-control" name="rang" id="field_rang" data-cy="rang" formControlName="rang" />
+          @if (editForm.get('rang')!.invalid && (editForm.get('rang')!.dirty || editForm.get('rang')!.touched)) {
+            <div>
+              @if (editForm.get('rang')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('rang')?.errors?.number">Ce champ doit être un nombre.</small>
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pubno">Pubno</label>
+          <select
+            class="form-control"
+            id="field_pubno"
+            data-cy="pubno"
+            name="pubno"
+            formControlName="pubno"
+            [compareWith]="comparePublication"
+          >
+            @if (!editForm.get('pubno')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (publicationOption of publicationsSharedCollection; track $index) {
+              <option [ngValue]="publicationOption">{{ publicationOption.pubno }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['pubno'])!.invalid && (editForm.get(['pubno'])!.dirty || editForm.get(['pubno'])!.touched)) {
+          <div>
+            @if (editForm.get(['pubno'])?.errors?.required) {
+              <small class="form-text text-danger">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_chno">Chno</label>
+          <select class="form-control" id="field_chno" data-cy="chno" name="chno" formControlName="chno" [compareWith]="compareChercheur">
+            @if (!editForm.get('chno')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (chercheurOption of chercheursSharedCollection; track $index) {
+              <option [ngValue]="chercheurOption">{{ chercheurOption.chno }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['chno'])!.invalid && (editForm.get(['chno'])!.dirty || editForm.get(['chno'])!.touched)) {
+          <div>
+            @if (editForm.get(['chno'])?.errors?.required) {
+              <small class="form-text text-danger">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

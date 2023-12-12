@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20231205101111"
+  },
+  "applications": ["tpsql"],
+  "entityTableName": "laboratoire",
+  "fields": [
+    {
+      "fieldName": "labno",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "labnom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Laboratoire",
+  "relationships": [
+    {
+      "otherEntityName": "faculte",
+      "relationshipName": "facno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Publier.
+    -->
+    <changeSet id="20231205101411-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pubno_pubno"
+                                 baseTableName="publier"
+                                 constraintName="fk_publier__pubno_id"
+                                 referencedColumnNames="pubno"
+                                 referencedTableName="publication"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="chno_chno"
+                                 baseTableName="publier"
+                                 constraintName="fk_publier__chno_id"
+                                 referencedColumnNames="chno"
+                                 referencedTableName="chercheur"
+                                 />
+    </changeSet>
+</databaseChangeLog>

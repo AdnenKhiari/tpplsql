@@ -1,0 +1,112 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName tpsql
+    buildTool gradle
+    cacheProvider no
+    clientFramework angular
+    clientTheme lumen
+    clientThemeVariant dark
+    creationTimestamp 1701770951663
+    databaseType sql
+    devDatabaseType oracle
+    enableHibernateCache false
+    enableSwaggerCodegen false
+    enableTranslation false
+    jwtSecretKey "ZTc4MDRhODc2ZDczOThjZWU3MWVmZTUzZmY0NDMyYjgzZDhlNjc0NmE5YmZkOTk5OWUxNjcwOWY2M2JhYTI0Yjc0YjFjOTEzMDE1NGFhNDU1YzQ4ODdhZTAyNzJhNjE0Y2M4YmM4MjM4MTk3ZTQ2MjhiYzNkZTQwZGEzZTVjNzY="
+    messageBroker false
+    microfrontends []
+    nativeLanguage fr
+    packageName com.mycompany.myapp
+    prodDatabaseType oracle
+    reactive false
+    searchEngine false
+    serviceDiscoveryType false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+    entities *
+}
+
+enum GradeType {
+    E, // Etudiant en 3ème cycle
+    D, // Doctorant
+    A, // Assistant
+    MA, // Maître Assistant
+    MC, // Maîte de conférence
+    PR // Professeur
+}
+
+enum StatutType {
+    P, // Permanent
+    C // Contractuel
+}
+
+enum PublicationType {
+    AS, // Article scientifique
+    PC, // Présentation en colloque
+    P,  // Poster
+    L,  // Livre
+    T,  // Thèse
+    M   // Mémoire de Mastère
+}
+
+entity Chercheur {
+@Id chno Long required,
+chnom String required,
+grade GradeType required,
+statut StatutType required,
+daterecrut LocalDate required,
+salaire Double required,
+prime Double required,
+email String required unique
+}
+
+entity Laboratoire {
+@Id labno Long required,
+labnom String required
+}
+
+entity Faculte {
+@Id facno Long required,
+facnom String required,
+adresse String required,
+libelle String required
+}
+
+entity Publication {
+@Id pubno Long required,
+titre String required,
+theme String required,
+type PublicationType required,
+volume Integer required,
+date LocalDate required,
+apparition String required,
+editeur String required
+}
+
+
+entity Publier {
+@Id pubId Long required
+rang Integer required
+}
+
+//relationship OneToOne {
+//  Chercheur{faculte(facno)} to Faculte{chercheurs}
+//  Laboratoire{faculte(facno)} to Faculte{chercheurs}
+//}
+
+relationship ManyToOne {
+Chercheur{labno required} to Laboratoire
+Chercheur{supno} to Chercheur
+Chercheur{facno required} to Faculte
+
+Laboratoire{facno required} to Faculte
+
+Publier{pubno required} to Publication
+Publier{chno required} to Chercheur
+}
+

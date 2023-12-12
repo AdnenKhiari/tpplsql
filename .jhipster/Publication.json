@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20231205101311"
+  },
+  "applications": ["tpsql"],
+  "entityTableName": "publication",
+  "fields": [
+    {
+      "fieldName": "pubno",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "theme",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "PublicationType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "AS,PC,P,L,T,M"
+    },
+    {
+      "fieldName": "volume",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "apparition",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "editeur",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Publication",
+  "relationships": [],
+  "searchEngine": "no"
+}

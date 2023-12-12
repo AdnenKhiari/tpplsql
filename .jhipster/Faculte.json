@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20231205101211"
+  },
+  "applications": ["tpsql"],
+  "entityTableName": "faculte",
+  "fields": [
+    {
+      "fieldName": "facno",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "facnom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Faculte",
+  "relationships": [],
+  "searchEngine": "no"
+}

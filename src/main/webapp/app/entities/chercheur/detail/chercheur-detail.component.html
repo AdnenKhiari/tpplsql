@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (chercheur) {
+      <div>
+        <h2 data-cy="chercheurDetailsHeading"><span>Chercheur</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>Chno</span></dt>
+          <dd>
+            <span>{{ chercheur.chno }}</span>
+          </dd>
+          <dt><span>Chnom</span></dt>
+          <dd>
+            <span>{{ chercheur.chnom }}</span>
+          </dd>
+          <dt><span>Grade</span></dt>
+          <dd>
+            <span>{{ chercheur.grade }}</span>
+          </dd>
+          <dt><span>Statut</span></dt>
+          <dd>
+            <span>{{ chercheur.statut }}</span>
+          </dd>
+          <dt><span>Daterecrut</span></dt>
+          <dd>
+            <span>{{ chercheur.daterecrut | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Salaire</span></dt>
+          <dd>
+            <span>{{ chercheur.salaire }}</span>
+          </dd>
+          <dt><span>Prime</span></dt>
+          <dd>
+            <span>{{ chercheur.prime }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ chercheur.email }}</span>
+          </dd>
+          <dt><span>Labno</span></dt>
+          <dd>
+            @if (chercheur.labno) {
+              <div>
+                <a [routerLink]="['/laboratoire', chercheur.labno.labno, 'view']">{{ chercheur.labno.labno }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Supno</span></dt>
+          <dd>
+            @if (chercheur.supno) {
+              <div>
+                <a [routerLink]="['/chercheur', chercheur.supno.chno, 'view']">{{ chercheur.supno.chno }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Facno</span></dt>
+          <dd>
+            @if (chercheur.facno) {
+              <div>
+                <a [routerLink]="['/faculte', chercheur.facno.facno, 'view']">{{ chercheur.facno.facno }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/chercheur', chercheur.chno, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

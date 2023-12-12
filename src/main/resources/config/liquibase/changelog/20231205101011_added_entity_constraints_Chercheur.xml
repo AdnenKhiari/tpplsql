@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Chercheur.
+    -->
+    <changeSet id="20231205101011-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="labno_labno"
+                                 baseTableName="chercheur"
+                                 constraintName="fk_chercheur__labno_id"
+                                 referencedColumnNames="labno"
+                                 referencedTableName="laboratoire"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="supno_chno"
+                                 baseTableName="chercheur"
+                                 constraintName="fk_chercheur__supno_id"
+                                 referencedColumnNames="chno"
+                                 referencedTableName="chercheur"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="facno_facno"
+                                 baseTableName="chercheur"
+                                 constraintName="fk_chercheur__facno_id"
+                                 referencedColumnNames="facno"
+                                 referencedTableName="faculte"
+                                 />
+    </changeSet>
+</databaseChangeLog>

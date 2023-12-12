@@ -1,0 +1,212 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-chercheur-heading" data-cy="ChercheurCreateUpdateHeading">Créer ou éditer un Chercheur</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.chno.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_chno">Chno</label>
+            <input type="number" class="form-control" name="chno" id="field_chno" data-cy="chno" formControlName="chno" [readonly]="true" />
+            @if (editForm.get('chno')!.invalid && (editForm.get('chno')!.dirty || editForm.get('chno')!.touched)) {
+              <div>
+                @if (editForm.get('chno')?.errors?.required) {
+                  <small class="form-text text-danger">Ce champ est obligatoire.</small>
+                }
+                <small class="form-text text-danger" [hidden]="!editForm.get('chno')?.errors?.number">Ce champ doit être un nombre.</small>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_chnom">Chnom</label>
+          <input type="text" class="form-control" name="chnom" id="field_chnom" data-cy="chnom" formControlName="chnom" />
+          @if (editForm.get('chnom')!.invalid && (editForm.get('chnom')!.dirty || editForm.get('chnom')!.touched)) {
+            <div>
+              @if (editForm.get('chnom')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_grade">Grade</label>
+          <select class="form-control" name="grade" formControlName="grade" id="field_grade" data-cy="grade">
+            <option [ngValue]="null"></option>
+            @for (gradeType of gradeTypeValues; track $index) {
+              <option [value]="gradeType">{{ gradeType }}</option>
+            }
+          </select>
+          @if (editForm.get('grade')!.invalid && (editForm.get('grade')!.dirty || editForm.get('grade')!.touched)) {
+            <div>
+              @if (editForm.get('grade')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_statut">Statut</label>
+          <select class="form-control" name="statut" formControlName="statut" id="field_statut" data-cy="statut">
+            <option [ngValue]="null"></option>
+            @for (statutType of statutTypeValues; track $index) {
+              <option [value]="statutType">{{ statutType }}</option>
+            }
+          </select>
+          @if (editForm.get('statut')!.invalid && (editForm.get('statut')!.dirty || editForm.get('statut')!.touched)) {
+            <div>
+              @if (editForm.get('statut')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_daterecrut">Daterecrut</label>
+          <div class="input-group">
+            <input
+              id="field_daterecrut"
+              data-cy="daterecrut"
+              type="text"
+              class="form-control"
+              name="daterecrut"
+              ngbDatepicker
+              #daterecrutDp="ngbDatepicker"
+              formControlName="daterecrut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="daterecrutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (editForm.get('daterecrut')!.invalid && (editForm.get('daterecrut')!.dirty || editForm.get('daterecrut')!.touched)) {
+            <div>
+              @if (editForm.get('daterecrut')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_salaire">Salaire</label>
+          <input type="number" class="form-control" name="salaire" id="field_salaire" data-cy="salaire" formControlName="salaire" />
+          @if (editForm.get('salaire')!.invalid && (editForm.get('salaire')!.dirty || editForm.get('salaire')!.touched)) {
+            <div>
+              @if (editForm.get('salaire')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('salaire')?.errors?.number">Ce champ doit être un nombre.</small>
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prime">Prime</label>
+          <input type="number" class="form-control" name="prime" id="field_prime" data-cy="prime" formControlName="prime" />
+          @if (editForm.get('prime')!.invalid && (editForm.get('prime')!.dirty || editForm.get('prime')!.touched)) {
+            <div>
+              @if (editForm.get('prime')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('prime')?.errors?.number">Ce champ doit être un nombre.</small>
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_labno">Labno</label>
+          <select
+            class="form-control"
+            id="field_labno"
+            data-cy="labno"
+            name="labno"
+            formControlName="labno"
+            [compareWith]="compareLaboratoire"
+          >
+            @if (!editForm.get('labno')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (laboratoireOption of laboratoiresSharedCollection; track $index) {
+              <option [ngValue]="laboratoireOption">{{ laboratoireOption.labno }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['labno'])!.invalid && (editForm.get(['labno'])!.dirty || editForm.get(['labno'])!.touched)) {
+          <div>
+            @if (editForm.get(['labno'])?.errors?.required) {
+              <small class="form-text text-danger">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_supno">Supno</label>
+          <select
+            class="form-control"
+            id="field_supno"
+            data-cy="supno"
+            name="supno"
+            formControlName="supno"
+            [compareWith]="compareChercheur"
+          >
+            <option [ngValue]="null"></option>
+            @for (chercheurOption of chercheursSharedCollection; track $index) {
+              <option [ngValue]="chercheurOption">{{ chercheurOption.chno }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_facno">Facno</label>
+          <select class="form-control" id="field_facno" data-cy="facno" name="facno" formControlName="facno" [compareWith]="compareFaculte">
+            @if (!editForm.get('facno')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (faculteOption of facultesSharedCollection; track $index) {
+              <option [ngValue]="faculteOption">{{ faculteOption.facno }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['facno'])!.invalid && (editForm.get(['facno'])!.dirty || editForm.get(['facno'])!.touched)) {
+          <div>
+            @if (editForm.get(['facno'])?.errors?.required) {
+              <small class="form-text text-danger">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

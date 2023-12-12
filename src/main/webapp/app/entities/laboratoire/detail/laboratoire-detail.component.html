@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (laboratoire) {
+      <div>
+        <h2 data-cy="laboratoireDetailsHeading"><span>Laboratoire</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>Labno</span></dt>
+          <dd>
+            <span>{{ laboratoire.labno }}</span>
+          </dd>
+          <dt><span>Labnom</span></dt>
+          <dd>
+            <span>{{ laboratoire.labnom }}</span>
+          </dd>
+          <dt><span>Facno</span></dt>
+          <dd>
+            @if (laboratoire.facno) {
+              <div>
+                <a [routerLink]="['/faculte', laboratoire.facno.facno, 'view']">{{ laboratoire.facno.facno }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/laboratoire', laboratoire.labno, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

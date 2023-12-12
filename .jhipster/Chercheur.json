@@ -1,0 +1,78 @@
+{
+  "annotations": {
+    "changelogDate": "20231205101011"
+  },
+  "applications": ["tpsql"],
+  "entityTableName": "chercheur",
+  "fields": [
+    {
+      "fieldName": "chno",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "chnom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "GradeType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "E,D,A,MA,MC,PR"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "P,C"
+    },
+    {
+      "fieldName": "daterecrut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "salaire",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prime",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "name": "Chercheur",
+  "relationships": [
+    {
+      "otherEntityName": "laboratoire",
+      "relationshipName": "labno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "chercheur",
+      "relationshipName": "supno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "faculte",
+      "relationshipName": "facno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

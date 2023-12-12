@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20231205101411"
+  },
+  "applications": ["tpsql"],
+  "entityTableName": "publier",
+  "fields": [
+    {
+      "fieldName": "pubId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "rang",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Publier",
+  "relationships": [
+    {
+      "otherEntityName": "publication",
+      "relationshipName": "pubno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "chercheur",
+      "relationshipName": "chno",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

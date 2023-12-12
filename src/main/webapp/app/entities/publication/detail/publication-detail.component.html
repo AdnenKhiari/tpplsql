@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (publication) {
+      <div>
+        <h2 data-cy="publicationDetailsHeading"><span>Publication</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>Pubno</span></dt>
+          <dd>
+            <span>{{ publication.pubno }}</span>
+          </dd>
+          <dt><span>Titre</span></dt>
+          <dd>
+            <span>{{ publication.titre }}</span>
+          </dd>
+          <dt><span>Theme</span></dt>
+          <dd>
+            <span>{{ publication.theme }}</span>
+          </dd>
+          <dt><span>Type</span></dt>
+          <dd>
+            <span>{{ publication.type }}</span>
+          </dd>
+          <dt><span>Volume</span></dt>
+          <dd>
+            <span>{{ publication.volume }}</span>
+          </dd>
+          <dt><span>Date</span></dt>
+          <dd>
+            <span>{{ publication.date | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Apparition</span></dt>
+          <dd>
+            <span>{{ publication.apparition }}</span>
+          </dd>
+          <dt><span>Editeur</span></dt>
+          <dd>
+            <span>{{ publication.editeur }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/publication', publication.pubno, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

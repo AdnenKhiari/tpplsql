@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-laboratoire-heading" data-cy="LaboratoireCreateUpdateHeading">Créer ou éditer un Laboratoire</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.labno.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_labno">Labno</label>
+            <input
+              type="number"
+              class="form-control"
+              name="labno"
+              id="field_labno"
+              data-cy="labno"
+              formControlName="labno"
+              [readonly]="true"
+            />
+            @if (editForm.get('labno')!.invalid && (editForm.get('labno')!.dirty || editForm.get('labno')!.touched)) {
+              <div>
+                @if (editForm.get('labno')?.errors?.required) {
+                  <small class="form-text text-danger">Ce champ est obligatoire.</small>
+                }
+                <small class="form-text text-danger" [hidden]="!editForm.get('labno')?.errors?.number">Ce champ doit être un nombre.</small>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_labnom">Labnom</label>
+          <input type="text" class="form-control" name="labnom" id="field_labnom" data-cy="labnom" formControlName="labnom" />
+          @if (editForm.get('labnom')!.invalid && (editForm.get('labnom')!.dirty || editForm.get('labnom')!.touched)) {
+            <div>
+              @if (editForm.get('labnom')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_facno">Facno</label>
+          <select class="form-control" id="field_facno" data-cy="facno" name="facno" formControlName="facno" [compareWith]="compareFaculte">
+            @if (!editForm.get('facno')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (faculteOption of facultesSharedCollection; track $index) {
+              <option [ngValue]="faculteOption">{{ faculteOption.facno }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['facno'])!.invalid && (editForm.get(['facno'])!.dirty || editForm.get(['facno'])!.touched)) {
+          <div>
+            @if (editForm.get(['facno'])?.errors?.required) {
+              <small class="form-text text-danger">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
