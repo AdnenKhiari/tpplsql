@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: system
-    password: oracle
+    url: jdbc:oracle:thin:@172.201.217.20:1521:xe
+    username: springboot
+    password: springboot
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -52,7 +52,7 @@ spring:
     cache: false
 
 server:
-  port: 8080
+  port: 8513
 
 # ===================================================================
 # JHipster specific properties
